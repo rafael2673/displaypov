@@ -1,15 +1,22 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use work.TypesPackage.all;
 
 entity pov is
    port (SW: in  std_logic_vector(3 downto 0);
 			KEY: in std_logic_vector(2 downto 0);
-                       LEDR, LEDG : out std_logic_vector(7 downto 0));
+         LEDR, LEDG: out std_logic_vector(7 downto 0);
+			pattern0, pattern1, pattern2, 
+			pattern3, pattern4, pattern5, 
+			pattern6, pattern7: out std_logic_vector(7 downto 0);
+			pattern_bit: out std_logic;
+			saida: out integer
+			);
 end pov;
 
 architecture logica of pov is
 
-type matrix_type is array(0 to 7, 0 to 7) of std_logic;
+--type matrix_type is array(0 to 7, 0 to 7) of std_logic;
 
 constant zero_pattern : matrix_type := (
     ( '0', '0', '0', '0', '0', '0', '0', '0' ),
@@ -187,25 +194,52 @@ constant fiveteen_pattern : matrix_type := (
     ( '0', '0', '0', '0', '1', '0', '0', '0' )
 );
 
- mux_16x1 is
-   port (A: in std_logic_vector(15 downto 0);
-			S: in std_logic_vector(3 downto 0);
-			saida: out std_logic);
-end component;
 
-component mux_8x1 is
-   port (A, B, C, D, E, F, G, H: in std_logic;
+component mux_8x1_8_bits is
+   port (A, B, C, D, E, F, G, H: in std_logic_vector(7 downto 0);
 			S: in std_logic_vector(2 downto 0);
-			saida: out std_logic);
+			saida: out std_logic_vector(7 downto 0));
 end component;
 
-signal saida_mux_8: 
+component mux_16x1_8x8_bits is
+   port (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P: in matrix_type;
+			S: in std_logic_vector(3 downto 0);
+			saida: out matrix_type);
+end component;
+
+component mux_8x1_int is
+   port (KEY: in std_logic_vector(2 downto 0);
+			saida: out integer);
+end component;
+
+
+signal pattern: matrix_type;
+signal saida_mux_8: integer;
 
 begin
+	M0: mux_16x1_8x8_bits port map(zero_pattern, one_pattern, two_pattern, three_pattern,
+										  four_pattern, five_pattern, six_pattern, seven_pattern, 
+										  eight_pattern, nine_pattern, ten_pattern, eleven_pattern, 
+										  twelve_pattern, thirteen_pattern, fourteen_pattern, fiveteen_pattern, 
+										  SW, pattern);
+										  
+	M1: mux_8x1_8_bits port map(pattern(0), pattern(1), pattern(2), pattern(3), pattern(4),
+										 pattern(5), pattern(6), pattern(7), KEY, LEDR);
+										 
+	M2: mux_8x1_int port map (KEY, saida_mux_8);
 
-LEDR <= pattern(saida_mux_8);
-
-LEDG <= pattern(0)(saida_mux_8) & pattern(1)(saida_mux_8) & pattern(2)(saida_mux_8) & pattern(3)(saida_mux_8) &
-        pattern(4)(saida_mux_8) & pattern(5)(saida_mux_8) & zero_pattern(6)(saida_mux_8) & pattern(7)(saida_mux_8);
-
+	LEDG <= pattern(0)(saida_mux_8) & pattern(1)(saida_mux_8) & pattern(2)(saida_mux_8) & pattern(3)(saida_mux_8) &
+           pattern(4)(saida_mux_8) & pattern(5)(saida_mux_8) & zero_pattern(6)(saida_mux_8) & pattern(7)(saida_mux_8);
+			  
+	saida <= saida_mux_8;
+	
+	pattern0 <= pattern(0);
+	pattern1 <= pattern(1);
+	pattern2 <= pattern(2);
+	pattern3 <= pattern(3);
+	pattern4 <= pattern(4);
+	pattern5 <= pattern(5);
+	pattern6 <= pattern(6);
+	pattern7 <= pattern(7);
+	pattern_bit <= pattern(2)(4);
 end logica;
