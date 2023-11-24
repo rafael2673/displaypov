@@ -10,7 +10,6 @@ entity pov is
 			pattern3, pattern4, pattern5, 
 			pattern6, pattern7: out std_logic_vector(7 downto 0);
 			pattern_bit: out std_logic;
-			saida: out integer
 			);
 end pov;
 
@@ -195,9 +194,9 @@ constant fiveteen_pattern : matrix_type := (
 );
 
 
+
 component mux_8x1_8_bits is
-   port (A, B, C, D, E, F, G, H: in std_logic_vector(7 downto 0);
-			S: in std_logic_vector(2 downto 0);
+   port (S: in std_logic_vector(2 downto 0);
 			saida: out std_logic_vector(7 downto 0));
 end component;
 
@@ -223,15 +222,12 @@ begin
 										  twelve_pattern, thirteen_pattern, fourteen_pattern, fiveteen_pattern, 
 										  SW, pattern);
 										  
-	M1: mux_8x1_8_bits port map(pattern(0), pattern(1), pattern(2), pattern(3), pattern(4),
-										 pattern(5), pattern(6), pattern(7), KEY, LEDR);
+	M1: mux_8x1_8_bits port map(KEY, LEDG);
 										 
 	M2: mux_8x1_int port map (KEY, saida_mux_8);
 
-	LEDG <= pattern(0)(saida_mux_8) & pattern(1)(saida_mux_8) & pattern(2)(saida_mux_8) & pattern(3)(saida_mux_8) &
+	LEDR <= pattern(0)(saida_mux_8) & pattern(1)(saida_mux_8) & pattern(2)(saida_mux_8) & pattern(3)(saida_mux_8) &
            pattern(4)(saida_mux_8) & pattern(5)(saida_mux_8) & zero_pattern(6)(saida_mux_8) & pattern(7)(saida_mux_8);
-			  
-	saida <= saida_mux_8;
 	
 	pattern0 <= pattern(0);
 	pattern1 <= pattern(1);
