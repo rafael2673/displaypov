@@ -1,14 +1,13 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use work.TypesPackage.all;
 
 entity pov is
    port (SW: in  std_logic_vector(3 downto 0);
 			KEY: in std_logic_vector(2 downto 0);
-         LEDR, LEDG: out std_logic_vector(7 downto 0);
+         LEDR, LEDG: out std_logic_vector(0 to 7);
 			pattern0, pattern1, pattern2, 
 			pattern3, pattern4, pattern5, 
-			pattern6, pattern7: out std_logic_vector(7 downto 0);
+			pattern6, pattern7: out std_logic_vector(0 to 7);
 			pattern_bit: out std_logic
 			);
 end pov;
@@ -17,12 +16,12 @@ architecture logica of pov is
 
 component mux_8x1_8_bits is
    port (S: in std_logic_vector(2 downto 0);
-			saida: out std_logic_vector(7 downto 0));
+			saida: out std_logic_vector(0 to 7));
 end component;
 
 component mux_16x1_8x8_bits is
    port (S: in std_logic_vector(3 downto 0);
-			pattern0, pattern1, pattern2, pattern3, pattern4, pattern5, pattern6, pattern7: out std_logic_vector(7 downto 0));
+			pattern0, pattern1, pattern2, pattern3, pattern4, pattern5, pattern6, pattern7: out std_logic_vector(0 to 7));
 end component;
 
 component mux_8x1_int is
@@ -34,7 +33,7 @@ end component;
 signal saida_mux_8: integer;
 signal pattern0_teste, pattern1_teste, pattern2_teste, 
 			pattern3_teste, pattern4_teste, pattern5_teste, 
-			pattern6_teste, pattern7_teste: std_logic_vector(7 downto 0);
+			pattern6_teste, pattern7_teste: std_logic_vector(0 to 7);
 
 begin
 	M0: mux_16x1_8x8_bits port map(SW, pattern0_teste, pattern1_teste, pattern2_teste, 

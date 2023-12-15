@@ -1,173 +1,172 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use work.TypesPackage.all;
 
 entity mux_16x1_8x8_bits is
    port (S: in std_logic_vector(3 downto 0);
-			pattern0, pattern1, pattern2, pattern3, pattern4, pattern5, pattern6, pattern7: out std_logic_vector(7 downto 0));
+			pattern0, pattern1, pattern2, pattern3, pattern4, pattern5, pattern6, pattern7: out std_logic_vector(0 to 7));
 end mux_16x1_8x8_bits;
 
 architecture logica of mux_16x1_8x8_bits is
-constant zero_pattern0: std_logic_vector:="00000000";
-constant zero_pattern1: std_logic_vector:="00011100";
-constant zero_pattern2: std_logic_vector:="00100010";
-constant zero_pattern3: std_logic_vector:="00100110";
-constant zero_pattern4: std_logic_vector:="00101010";
-constant zero_pattern5: std_logic_vector:="00110010";
-constant zero_pattern6: std_logic_vector:="00100010";
-constant zero_pattern7: std_logic_vector:="00011100";
+constant zero_pattern0: std_logic_vector(0 to 7):="00000000";
+constant zero_pattern1: std_logic_vector(0 to 7):="00011100";
+constant zero_pattern2: std_logic_vector(0 to 7):="00100010";
+constant zero_pattern3: std_logic_vector(0 to 7):="00100110";
+constant zero_pattern4: std_logic_vector(0 to 7):="00101010";
+constant zero_pattern5: std_logic_vector(0 to 7):="00110010";
+constant zero_pattern6: std_logic_vector(0 to 7):="00100010";
+constant zero_pattern7: std_logic_vector(0 to 7):="00011100";
 
 
 
-constant one_pattern0: std_logic_vector:="00000000";
-constant one_pattern1: std_logic_vector:="00001000";
-constant one_pattern2: std_logic_vector:="00011000";
-constant one_pattern3: std_logic_vector:="00001000";
-constant one_pattern4: std_logic_vector:="00001000";
-constant one_pattern5: std_logic_vector:="00001000";
-constant one_pattern6: std_logic_vector:="00001000";
-constant one_pattern7: std_logic_vector:="00011100";
+constant one_pattern0: std_logic_vector(0 to 7):="00000000";
+constant one_pattern1: std_logic_vector(0 to 7):="00001000";
+constant one_pattern2: std_logic_vector(0 to 7):="00011000";
+constant one_pattern3: std_logic_vector(0 to 7):="00001000";
+constant one_pattern4: std_logic_vector(0 to 7):="00001000";
+constant one_pattern5: std_logic_vector(0 to 7):="00001000";
+constant one_pattern6: std_logic_vector(0 to 7):="00001000";
+constant one_pattern7: std_logic_vector(0 to 7):="00011100";
 
 
 
-constant two_pattern0: std_logic_vector:="00000000";
-constant two_pattern1: std_logic_vector:="00011100";
-constant two_pattern2: std_logic_vector:="00100010";
-constant two_pattern3: std_logic_vector:="00000010";
-constant two_pattern4: std_logic_vector:="00001100";
-constant two_pattern5: std_logic_vector:="00010000";
-constant two_pattern6: std_logic_vector:="00100000";
-constant two_pattern7: std_logic_vector:="00111110";
+constant two_pattern0: std_logic_vector(0 to 7):="00000000";
+constant two_pattern1: std_logic_vector(0 to 7):="00011100";
+constant two_pattern2: std_logic_vector(0 to 7):="00100010";
+constant two_pattern3: std_logic_vector(0 to 7):="00000010";
+constant two_pattern4: std_logic_vector(0 to 7):="00001100";
+constant two_pattern5: std_logic_vector(0 to 7):="00010000";
+constant two_pattern6: std_logic_vector(0 to 7):="00100000";
+constant two_pattern7: std_logic_vector(0 to 7):="00111110";
 
 
-constant three_pattern0: std_logic_vector:="00000000";
-constant three_pattern1: std_logic_vector:="00011100";
-constant three_pattern2: std_logic_vector:="00100010";
-constant three_pattern3: std_logic_vector:="00000010";
-constant three_pattern4: std_logic_vector:="00011100";
-constant three_pattern5: std_logic_vector:="00000010";
-constant three_pattern6: std_logic_vector:="00100010";
-constant three_pattern7: std_logic_vector:="00011100";
+constant three_pattern0: std_logic_vector(0 to 7):="00000000";
+constant three_pattern1: std_logic_vector(0 to 7):="00011100";
+constant three_pattern2: std_logic_vector(0 to 7):="00100010";
+constant three_pattern3: std_logic_vector(0 to 7):="00000010";
+constant three_pattern4: std_logic_vector(0 to 7):="00011100";
+constant three_pattern5: std_logic_vector(0 to 7):="00000010";
+constant three_pattern6: std_logic_vector(0 to 7):="00100010";
+constant three_pattern7: std_logic_vector(0 to 7):="00011100";
 
 
-constant four_pattern0: std_logic_vector:="00000000";
-constant four_pattern1: std_logic_vector:="00000100";
-constant four_pattern2: std_logic_vector:="00001100";
-constant four_pattern3: std_logic_vector:="00010100";
-constant four_pattern4: std_logic_vector:="00100100";
-constant four_pattern5: std_logic_vector:="00111110";
-constant four_pattern6: std_logic_vector:="00000100";
-constant four_pattern7: std_logic_vector:="00000100";
+constant four_pattern0: std_logic_vector(0 to 7):="00000000";
+constant four_pattern1: std_logic_vector(0 to 7):="00000100";
+constant four_pattern2: std_logic_vector(0 to 7):="00001100";
+constant four_pattern3: std_logic_vector(0 to 7):="00010100";
+constant four_pattern4: std_logic_vector(0 to 7):="00100100";
+constant four_pattern5: std_logic_vector(0 to 7):="00111110";
+constant four_pattern6: std_logic_vector(0 to 7):="00000100";
+constant four_pattern7: std_logic_vector(0 to 7):="00000100";
 
 
-constant five_pattern0: std_logic_vector:="00000000";
-constant five_pattern1: std_logic_vector:="00111110";
-constant five_pattern2: std_logic_vector:="00100000";
-constant five_pattern3: std_logic_vector:="00111100";
-constant five_pattern4: std_logic_vector:="00000010";
-constant five_pattern5: std_logic_vector:="00000010";
-constant five_pattern6: std_logic_vector:="00100010";
-constant five_pattern7: std_logic_vector:="00011100";
+constant five_pattern0: std_logic_vector(0 to 7):="00000000";
+constant five_pattern1: std_logic_vector(0 to 7):="00111110";
+constant five_pattern2: std_logic_vector(0 to 7):="00100000";
+constant five_pattern3: std_logic_vector(0 to 7):="00111100";
+constant five_pattern4: std_logic_vector(0 to 7):="00000010";
+constant five_pattern5: std_logic_vector(0 to 7):="00000010";
+constant five_pattern6: std_logic_vector(0 to 7):="00100010";
+constant five_pattern7: std_logic_vector(0 to 7):="00011100";
 
 
-constant six_pattern0: std_logic_vector:="00000000";
-constant six_pattern1: std_logic_vector:="00001100";
-constant six_pattern2: std_logic_vector:="00010000";
-constant six_pattern3: std_logic_vector:="00100000";
-constant six_pattern4: std_logic_vector:="00111100";
-constant six_pattern5: std_logic_vector:="00100010";
-constant six_pattern6: std_logic_vector:="00100010";
-constant six_pattern7: std_logic_vector:="00011100";
+constant six_pattern0: std_logic_vector(0 to 7):="00000000";
+constant six_pattern1: std_logic_vector(0 to 7):="00001100";
+constant six_pattern2: std_logic_vector(0 to 7):="00010000";
+constant six_pattern3: std_logic_vector(0 to 7):="00100000";
+constant six_pattern4: std_logic_vector(0 to 7):="00111100";
+constant six_pattern5: std_logic_vector(0 to 7):="00100010";
+constant six_pattern6: std_logic_vector(0 to 7):="00100010";
+constant six_pattern7: std_logic_vector(0 to 7):="00011100";
 
 
-constant seven_pattern0: std_logic_vector:="00000000";
-constant seven_pattern1: std_logic_vector:="00111110";
-constant seven_pattern2: std_logic_vector:="00000010";
-constant seven_pattern3: std_logic_vector:="00000100";
-constant seven_pattern4: std_logic_vector:="00001000";
-constant seven_pattern5: std_logic_vector:="00010000";
-constant seven_pattern6: std_logic_vector:="00010000";
-constant seven_pattern7: std_logic_vector:="00010000";
+constant seven_pattern0: std_logic_vector(0 to 7):="00000000";
+constant seven_pattern1: std_logic_vector(0 to 7):="00111110";
+constant seven_pattern2: std_logic_vector(0 to 7):="00000010";
+constant seven_pattern3: std_logic_vector(0 to 7):="00000100";
+constant seven_pattern4: std_logic_vector(0 to 7):="00001000";
+constant seven_pattern5: std_logic_vector(0 to 7):="00010000";
+constant seven_pattern6: std_logic_vector(0 to 7):="00010000";
+constant seven_pattern7: std_logic_vector(0 to 7):="00010000";
 
 
-constant eight_pattern0: std_logic_vector:="00000000";
-constant eight_pattern1: std_logic_vector:="00011100";
-constant eight_pattern2: std_logic_vector:="00100010";
-constant eight_pattern3: std_logic_vector:="00100010";
-constant eight_pattern4: std_logic_vector:="00011100";
-constant eight_pattern5: std_logic_vector:="00100010";
-constant eight_pattern6: std_logic_vector:="00100010";
-constant eight_pattern7: std_logic_vector:="00011100";
+constant eight_pattern0: std_logic_vector(0 to 7):="00000000";
+constant eight_pattern1: std_logic_vector(0 to 7):="00011100";
+constant eight_pattern2: std_logic_vector(0 to 7):="00100010";
+constant eight_pattern3: std_logic_vector(0 to 7):="00100010";
+constant eight_pattern4: std_logic_vector(0 to 7):="00011100";
+constant eight_pattern5: std_logic_vector(0 to 7):="00100010";
+constant eight_pattern6: std_logic_vector(0 to 7):="00100010";
+constant eight_pattern7: std_logic_vector(0 to 7):="00011100";
 
 
-constant nine_pattern0: std_logic_vector:="00000000";
-constant nine_pattern1: std_logic_vector:="00011100";
-constant nine_pattern2: std_logic_vector:="00100010";
-constant nine_pattern3: std_logic_vector:="00100010";
-constant nine_pattern4: std_logic_vector:="00011110";
-constant nine_pattern5: std_logic_vector:="00000010";
-constant nine_pattern6: std_logic_vector:="00000100";
-constant nine_pattern7: std_logic_vector:="00011000";
+constant nine_pattern0: std_logic_vector(0 to 7):="00000000";
+constant nine_pattern1: std_logic_vector(0 to 7):="00011100";
+constant nine_pattern2: std_logic_vector(0 to 7):="00100010";
+constant nine_pattern3: std_logic_vector(0 to 7):="00100010";
+constant nine_pattern4: std_logic_vector(0 to 7):="00011110";
+constant nine_pattern5: std_logic_vector(0 to 7):="00000010";
+constant nine_pattern6: std_logic_vector(0 to 7):="00000100";
+constant nine_pattern7: std_logic_vector(0 to 7):="00011000";
 
 
-constant ten_pattern0: std_logic_vector:="00000000";
-constant ten_pattern1: std_logic_vector:="00000000";
-constant ten_pattern2: std_logic_vector:="00000000";
-constant ten_pattern3: std_logic_vector:="00011000";
-constant ten_pattern4: std_logic_vector:="00000100";
-constant ten_pattern5: std_logic_vector:="00011100";
-constant ten_pattern6: std_logic_vector:="00100100";
-constant ten_pattern7: std_logic_vector:="00011110";
+constant ten_pattern0: std_logic_vector(0 to 7):="00000000";
+constant ten_pattern1: std_logic_vector(0 to 7):="00000000";
+constant ten_pattern2: std_logic_vector(0 to 7):="00000000";
+constant ten_pattern3: std_logic_vector(0 to 7):="00011000";
+constant ten_pattern4: std_logic_vector(0 to 7):="00000100";
+constant ten_pattern5: std_logic_vector(0 to 7):="00011100";
+constant ten_pattern6: std_logic_vector(0 to 7):="00100100";
+constant ten_pattern7: std_logic_vector(0 to 7):="00011110";
 
 
-constant eleven_pattern0: std_logic_vector:="00000000";
-constant eleven_pattern1: std_logic_vector:="00100000";
-constant eleven_pattern2: std_logic_vector:="00100000";
-constant eleven_pattern3: std_logic_vector:="00101100";
-constant eleven_pattern4: std_logic_vector:="00110010";
-constant eleven_pattern5: std_logic_vector:="00100010";
-constant eleven_pattern6: std_logic_vector:="00100010";
-constant eleven_pattern7: std_logic_vector:="00111100";
+constant eleven_pattern0: std_logic_vector(0 to 7):="00000000";
+constant eleven_pattern1: std_logic_vector(0 to 7):="00100000";
+constant eleven_pattern2: std_logic_vector(0 to 7):="00100000";
+constant eleven_pattern3: std_logic_vector(0 to 7):="00101100";
+constant eleven_pattern4: std_logic_vector(0 to 7):="00110010";
+constant eleven_pattern5: std_logic_vector(0 to 7):="00100010";
+constant eleven_pattern6: std_logic_vector(0 to 7):="00100010";
+constant eleven_pattern7: std_logic_vector(0 to 7):="00111100";
 
 
-constant twelve_pattern0: std_logic_vector:="00000000";
-constant twelve_pattern1: std_logic_vector:="00000000";
-constant twelve_pattern2: std_logic_vector:="00000000";
-constant twelve_pattern3: std_logic_vector:="00011100";
-constant twelve_pattern4: std_logic_vector:="00100000";
-constant twelve_pattern5: std_logic_vector:="00100000";
-constant twelve_pattern6: std_logic_vector:="00100010";
-constant twelve_pattern7: std_logic_vector:="00011100";
+constant twelve_pattern0: std_logic_vector(0 to 7):="00000000";
+constant twelve_pattern1: std_logic_vector(0 to 7):="00000000";
+constant twelve_pattern2: std_logic_vector(0 to 7):="00000000";
+constant twelve_pattern3: std_logic_vector(0 to 7):="00011100";
+constant twelve_pattern4: std_logic_vector(0 to 7):="00100000";
+constant twelve_pattern5: std_logic_vector(0 to 7):="00100000";
+constant twelve_pattern6: std_logic_vector(0 to 7):="00100010";
+constant twelve_pattern7: std_logic_vector(0 to 7):="00011100";
 
 
-constant thirteen_pattern0: std_logic_vector:="00000000";
-constant thirteen_pattern1: std_logic_vector:="00000010";
-constant thirteen_pattern2: std_logic_vector:="00000010";
-constant thirteen_pattern3: std_logic_vector:="00011010";
-constant thirteen_pattern4: std_logic_vector:="00100110";
-constant thirteen_pattern5: std_logic_vector:="00100010";
-constant thirteen_pattern6: std_logic_vector:="00100010";
-constant thirteen_pattern7: std_logic_vector:="00011110";
+constant thirteen_pattern0: std_logic_vector(0 to 7):="00000000";
+constant thirteen_pattern1: std_logic_vector(0 to 7):="00000010";
+constant thirteen_pattern2: std_logic_vector(0 to 7):="00000010";
+constant thirteen_pattern3: std_logic_vector(0 to 7):="00011010";
+constant thirteen_pattern4: std_logic_vector(0 to 7):="00100110";
+constant thirteen_pattern5: std_logic_vector(0 to 7):="00100010";
+constant thirteen_pattern6: std_logic_vector(0 to 7):="00100010";
+constant thirteen_pattern7: std_logic_vector(0 to 7):="00011110";
 
 
-constant fourteen_pattern0: std_logic_vector:="00000000";
-constant fourteen_pattern1: std_logic_vector:="00000000";
-constant fourteen_pattern2: std_logic_vector:="00000000";
-constant fourteen_pattern3: std_logic_vector:="00011100";
-constant fourteen_pattern4: std_logic_vector:="00100010";
-constant fourteen_pattern5: std_logic_vector:="00111100";
-constant fourteen_pattern6: std_logic_vector:="00100000";
-constant fourteen_pattern7: std_logic_vector:="00011100";
+constant fourteen_pattern0: std_logic_vector(0 to 7):="00000000";
+constant fourteen_pattern1: std_logic_vector(0 to 7):="00000000";
+constant fourteen_pattern2: std_logic_vector(0 to 7):="00000000";
+constant fourteen_pattern3: std_logic_vector(0 to 7):="00011100";
+constant fourteen_pattern4: std_logic_vector(0 to 7):="00100010";
+constant fourteen_pattern5: std_logic_vector(0 to 7):="00111100";
+constant fourteen_pattern6: std_logic_vector(0 to 7):="00100000";
+constant fourteen_pattern7: std_logic_vector(0 to 7):="00011100";
 
 
-constant fiveteen_pattern0: std_logic_vector:="00000000";
-constant fiveteen_pattern1: std_logic_vector:="00000100";
-constant fiveteen_pattern2: std_logic_vector:="00001010";
-constant fiveteen_pattern3: std_logic_vector:="00001000";
-constant fiveteen_pattern4: std_logic_vector:="00011100";
-constant fiveteen_pattern5: std_logic_vector:="00001000";
-constant fiveteen_pattern6: std_logic_vector:="00001000";
-constant fiveteen_pattern7: std_logic_vector:="00001000";
+constant fiveteen_pattern0: std_logic_vector(0 to 7):="00000000";
+constant fiveteen_pattern1: std_logic_vector(0 to 7):="00000100";
+constant fiveteen_pattern2: std_logic_vector(0 to 7):="00001010";
+constant fiveteen_pattern3: std_logic_vector(0 to 7):="00001000";
+constant fiveteen_pattern4: std_logic_vector(0 to 7):="00011100";
+constant fiveteen_pattern5: std_logic_vector(0 to 7):="00001000";
+constant fiveteen_pattern6: std_logic_vector(0 to 7):="00001000";
+constant fiveteen_pattern7: std_logic_vector(0 to 7):="00001000";
 
 begin
 	process (S)
